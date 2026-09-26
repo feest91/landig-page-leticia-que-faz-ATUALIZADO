@@ -1,0 +1,113 @@
+{
+  "theme": "dark",
+  "typography": {
+    "primary_font": "Montserrat",
+    "secondary_font": "Montserrat",
+    "rules": {
+      "headings": "Montserrat ExtraBold (800) or Black (900), ALWAYS UPPERCASE. Tracking tight (tracking-tighter).",
+      "body": "Montserrat Regular (400) or Medium (500). Tracking normal.",
+      "accents": "Uppercase, highly tracked (e.g., tracking-widest) for overlines, labels, and manifesto numbers."
+    }
+  },
+  "colors": {
+    "background": "#0F0E0E",
+    "surface": "#1A1818",
+    "primary_accent": "#C2185B",
+    "secondary_accent": "#800020",
+    "text_primary": "#FFFFFF",
+    "text_secondary": "#E8DFD8",
+    "border_subtle": "#2A2A2A",
+    "rules": "No neon, no glows, no bright gradients. Matte, flat, high contrast. Use #C2185B (Matte Rose) exclusively for CTAs (WhatsApp, Quero este resultado) and specific highlighted words. Use #800020 (Deep Burgundy) for subtle borders or large geometric background accents. Text must use pure white (#FFFFFF) for headings and ivory/nude (#E8DFD8) for descriptions."
+  },
+  "visual_enhancers": {
+    "shadows": "None. Rely on 1px solid borders (#2A2A2A) to separate elements. No soft box-shadows. Keep it flat, brutalist, and technical.",
+    "border_radius": "Sharp edges (rounded-none) or extremely minimal (rounded-sm/2px). Do not use fully rounded pill buttons. Sharpness implies precision and aggressive elegance.",
+    "textures": "Include a subtle noise overlay across the main background (opacity 2-4%) to simulate matte editorial paper, removing any 'digital screen' feel."
+  },
+  "components": [
+    {
+      "name": "Hero Section",
+      "instructions": "Full height (min-h-screen). Asymmetrical layout. High-quality professional image with subtle scroll parallax. Kinetic typography for the main headline with masked line-by-line reveal on load (using framer-motion). Include authority metrics (+1.200 atendimentos, 100% precisão, avaliação 5.0) arranged in a structured, technical grid (1px visible borders). Prominent WhatsApp CTA button in Matte Rose."
+    },
+    {
+      "name": "Editorial Marquee",
+      "instructions": "A slow, infinite scrolling marquee dividing sections. Use text like 'BEAUTY ACADEMY • NAILS DESIGNER • LASH LIFTING • BROW LAMINATION •'. Font must be Montserrat 800, uppercase. Style it as transparent text with 1px white stroke, or solid #1A1818 text on a #800020 background."
+    },
+    {
+      "name": "Rotating Card",
+      "instructions": "An eye-catching, animated decorative element placed strategically in the middle of the flow. Contains the text 'Olá, Maravilhosas! ❤️'. It should slowly rotate 360 degrees infinitely (via framer-motion), acting as a visual anchor. Use matte surface #1A1818 with sharp edges."
+    },
+    {
+      "name": "Specialties Grid",
+      "instructions": "4 manifesto-style numbered cards (01, 02, 03, 04). Services: Nails Designer, Design de Sobrancelhas, Brow Lamination, Lash Lifting. Hover state: image scales up subtly inside a hidden overflow container, text colors may invert or highlight in pink. No prices allowed."
+    },
+    {
+      "name": "Portfolio Gallery",
+      "instructions": "Asymmetrical, bento-style grid. Each portfolio item must include a sharp, discreet CTA button: 'Quero este resultado'. Intersecting the gallery, display the phrase: 'A combinação perfeita entre você, a sua beleza e o seu momento.' in large, imposing typography."
+    },
+    {
+      "name": "Location & Footer",
+      "instructions": "Dark, minimalist map/location section. Button 'Como chegar' in Matte Rose. Final bold scheduling call-to-action. Footer should be extremely minimal: copyright, WhatsApp link, technical text."
+    }
+  ],
+  "grids_and_layouts": {
+    "strategy": "Swiss Brutalist mixed with High-End Fashion Editorial (Fenty Beauty / NARS style). Use sharp grid lines and visible borders (1px solid #2A2A2A) to compartmentalize information. Asymmetry creates visual tension and interest.",
+    "spacing": "Generous. Use p-12 to p-24 (Tailwind) for section padding. Do not cramp elements. Let the negative space emphasize luxury."
+  },
+  "motion_and_interactions": {
+    "scrolling": "MUST use 'lenis' library for smooth momentum scrolling. This is critical for the premium luxury feel.",
+    "reveal": "Use framer-motion for scroll-triggered text reveals and image fade-ins. Keep animations slow and deliberate (e.g., duration 0.8s, ease out).",
+    "hover": "Buttons should have a sharp background color fill transition. Images should have a slow, elegant scale effect on hover without bouncing."
+  },
+  "accessibility": {
+    "contrast": "Ensure pure white text on #0F0E0E and #1A1818 meets APCA standards.",
+    "animations": "Respect prefers-reduced-motion media query for all framer-motion animations."
+  },
+  "media": {
+    "image_urls": [
+      {
+        "url": "https://images.unsplash.com/photo-1594157895135-57d7f66f2a0f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHw0fHxsdXh1cnklMjBiZWF1dHklMjBzYWxvbiUyMHdvbWFuJTIwcG9ydHJhaXQlMjBkYXJrJTIwZWxlZ2FudHxlbnwwfHx8fDE3ODY1MzI0MjJ8MA&ixlib=rb-4.1.0&q=85",
+        "category": "Hero Background / Professional Image",
+        "description": "Elegant dark portrait of a woman to represent the professional."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1684609365994-a144ee021c88?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwyfHxtYWNybyUyMGNsb3NlJTIwdXAlMjBlbGVnYW50JTIwbmFpbHMlMjBtYW5pY3VyZSUyMGRhcmslMjBhZXN0aGV0aWN8ZW58MHx8fHwxNzg2NTMyNDIyfDA&ixlib=rb-4.1.0&q=85",
+        "category": "Specialties - Nails Designer",
+        "description": "Macro close up of elegant nails on dark aesthetic background."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1614000134361-c0055740bf7c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MTJ8MHwxfHNlYXJjaHwzfHxtYWNybyUyMGNsb3NlJTIwdXAlMjBleWUlMjBleWVsYXNoZXMlMjBleHRlbnNpb25zJTIwZGFyayUyMGFlc3RoZXRpY3xlbnwwfHx8fDE3ODY1MzI0MjJ8MA&ixlib=rb-4.1.0&q=85",
+        "category": "Specialties - Lash Lifting",
+        "description": "Macro close up of eyelashes, dark aesthetic."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1763325227629-f4a2c7fd110f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MTJ8MHwxfHNlYXJjaHwyfHxtYWNybyUyMGNsb3NlJTIwdXAlMjBleWUlMjBleWVsYXNoZXMlMjBleHRlbnNpb25zJTIwZGFyayUyMGFlc3RoZXRpY3xlbnwwfHx8fDE3ODY1MzI0MjJ8MA&ixlib=rb-4.1.0&q=85",
+        "category": "Specialties - Brow Lamination / Eyebrows",
+        "description": "Close up of an eye and eyebrow."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1769719020461-814c5c86f2bd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwyfHxsdXh1cnklMjBtYWtldXAlMjBtb2RlbCUyMGZhY2UlMjBjbG9zZSUyMHVwJTIwZGFyayUyMGZlbWluaW5lfGVufDB8fHx8MTc4NjUzMjQyMnww&ixlib=rb-4.1.0&q=85",
+        "category": "Portfolio / General Beauty",
+        "description": "Luxury dark feminine face portrait."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1648844421753-351afd50486a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwzfHxtYWNybyUyMGNsb3NlJTIwdXAlMjBlbGVnYW50JTIwbmFpbHMlMjBtYW5pY3VyZSUyMGRhcmslMjBhZXN0aGV0aWN8ZW58MHx8fHwxNzg2NTMyNDIyfDA&ixlib=rb-4.1.0&q=85",
+        "category": "Portfolio - Nails",
+        "description": "Elegant manicure."
+      }
+    ]
+  },
+  "libraries_and_tools": {
+    "3d_libraries": "Framer Motion for 2D parallax and kinetic components. Lenis for smooth momentum scrolling. lucide-react for sharp minimal icons.",
+    "commands": "yarn add framer-motion @studio-freight/lenis lucide-react clsx tailwind-merge"
+  },
+  "instructions_to_main_agent": [
+    "Ensure complete adherence to the 'Montserrat only' typography rule. Import it via Google Fonts. Do not use Inter or any other sans font.",
+    "Implement Lenis smooth scrolling immediately at the App.js / index.js root level.",
+    "Use framer-motion heavily for the masked hero text reveal and the rotating 'Olá, Maravilhosas!' card.",
+    "Buttons must have a solid, matte, sharp look. Background #C2185B (Matte Rose) with #FFFFFF text. No border radius (rounded-none) or very minimal (rounded-sm).",
+    "Section borders should be visible (e.g., border-t border-[#2A2A2A]) to give a structured, technical, editorial feel.",
+    "Add 'data-testid' attributes to all buttons, CTAs, and interactive elements for testing."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": "Do not center align text by default; maintain strict left-alignment for body descriptions to enhance readability. Avoid generic SaaS 'glassmorphism' everywhere—prefer solid dark matte surfaces. Use generous padding (e.g., py-24). Implement elegant hover micro-interactions. If using Shadcn components, heavily customize them to remove default Vercel-like borders and shadows, replacing them with sharp, flat, dark aesthetic styling. Ensure sonner is used for any needed toasts."
+}
