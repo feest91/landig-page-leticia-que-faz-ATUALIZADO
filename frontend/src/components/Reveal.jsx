@@ -1,26 +1,24 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+const ease = [0.16, 1, 0.3, 1];
 
-export const Reveal = ({ children, delay = 0, className = "" }) => (
-  <span className={`block overflow-hidden ${className}`}>
-    <motion.span
-      className="block"
-      initial={{ y: "110%" }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
-    >
+export const Reveal = ({ children, delay = 0, className = "" }) => {
+  const reduceMotion = useReducedMotion();
+  return <span className={`reveal-mask ${className}`}>
+    <motion.span className="reveal-content"
+      initial={reduceMotion ? false : { y: "105%", opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: reduceMotion ? 0 : 0.8, delay: reduceMotion ? 0 : delay, ease }}>
       {children}
     </motion.span>
-  </span>
-);
-
-export const FadeUp = ({ children, delay = 0, className = "" }) => (
-  <motion.div
-    className={className}
-    initial={{ opacity: 0, y: 40 }}
+  </span>;
+};
+export const FadeUp = ({ children, delay = 0, className = "" }) => {
+  const reduceMotion = useReducedMotion();
+  return <motion.div className={className}
+    initial={reduceMotion ? false : { opacity: 0, y: 26 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-80px" }}
-    transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
-  >
+    viewport={{ once: true, amount: 0.12 }}
+    transition={{ duration: reduceMotion ? 0 : 0.75, delay: reduceMotion ? 0 : delay, ease }}>
     {children}
-  </motion.div>
-);
+  </motion.div>;
+};

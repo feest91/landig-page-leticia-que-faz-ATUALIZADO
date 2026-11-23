@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
+import { useReducedMotion } from "framer-motion";
 import "@/App.css";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -11,7 +12,9 @@ import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
 function App() {
+  const reduceMotion = useReducedMotion();
   useEffect(() => {
+    if (reduceMotion) return;
     const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
     let rafId;
     const raf = (time) => {
@@ -26,7 +29,7 @@ function App() {
         const el = document.querySelector(a.getAttribute("href"));
         if (el) {
           e.preventDefault();
-          lenis.scrollTo(el, { offset: -64 });
+          lenis.scrollTo(el, { offset: -(document.querySelector("header")?.offsetHeight || 82) - 20 });
         }
       }
     };
@@ -36,12 +39,12 @@ function App() {
       document.removeEventListener("click", onAnchor);
       lenis.destroy();
     };
-  }, []);
+  }, [reduceMotion]);
 
   return (
-    <div className="noise-overlay bg-graphite font-montserrat text-ivory">
+    <div className="app-shell">
       <Navbar />
-      <main className="overflow-x-hidden">
+      <main id="main-content">
         <Hero />
         <Marquee />
         <Specialties />

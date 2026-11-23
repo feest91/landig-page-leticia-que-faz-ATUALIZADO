@@ -1,4 +1,12 @@
 {
+  "name": "leticiaquefaz-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm --prefix frontend run start",
+    "build": "npm --prefix frontend run build",
+    "test": "npm --prefix frontend run test"
+  },
   "devDependencies": {
     "ajv": "^8.20.0",
     "ajv-keywords": "^5.1.0"
