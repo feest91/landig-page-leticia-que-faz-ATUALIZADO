@@ -10,6 +10,7 @@ import RotatingCard from "@/components/RotatingCard";
 import Location from "@/components/Location";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import PromoModal from "@/components/PromoModal";
 
 function App() {
   const reduceMotion = useReducedMotion();
@@ -54,6 +55,7 @@ function App() {
         <FinalCTA />
       </main>
       <Footer />
+      <PromoModal />
     </div>
   );
 }
