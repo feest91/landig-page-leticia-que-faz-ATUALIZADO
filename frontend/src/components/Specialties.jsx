@@ -10,20 +10,22 @@ const Specialties = () => (
         <h2>Técnica, precisão <span className="quiet-word">&amp;</span> <strong>naturalidade</strong></h2>
       </FadeUp>
       <FadeUp>
-        <a
-          href={PROMO_WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="promo-banner-link"
-        >
-          <img
-            src="/assets/banner-leticia-boas-vindas.svg"
-            alt="Promoção de Boas-Vindas Design de Sobrancelhas 10€"
-            className="promo-banner-img"
-            loading="lazy"
-            decoding="async"
-          />
-        </a>
+        <div className="promo-banner-wrapper">
+          <a
+            href={PROMO_WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="promo-banner-link"
+          >
+            <img
+              src="/assets/banner-leticia-boas-vindas.svg"
+              alt="Promoção de Boas-Vindas Design de Sobrancelhas 10€"
+              className="promo-banner-img"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+        </div>
       </FadeUp>
       <div className="services-grid">
         {SPECIALTIES.map((service, i) => (

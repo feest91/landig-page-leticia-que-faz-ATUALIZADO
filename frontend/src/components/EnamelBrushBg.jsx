@@ -1,7 +1,45 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const DESKTOP_CONFIG = {
+  viewBox: "0 0 1440 820",
+  pathD: "M -70,705 C 205,680 435,545 675,380 C 895,228 1135,140 1295,268 C 1412,362 1368,582 1185,642",
+  glossPathD: "M -70,687 C 205,662 435,527 675,362 C 895,210 1135,122 1295,250 C 1412,344 1368,564 1185,624",
+  strokeWidth: 72,
+  glossStrokeWidth: 8,
+  brushScale: 1,
+  opacity: 0.35,
+  sparkleInterval: 28,
+  sparkleRadius: 2.2,
+};
+
+const MOBILE_CONFIG = {
+  viewBox: "0 0 420 920",
+  pathD: "M -30,110 C 160,130 380,210 370,390 C 360,540 80,550 70,710 C 60,820 250,860 410,810",
+  glossPathD: "M -30,102 C 160,122 380,202 370,382 C 360,532 80,542 70,702 C 60,812 250,852 410,802",
+  strokeWidth: 36,
+  glossStrokeWidth: 5,
+  brushScale: 0.58,
+  opacity: 0.25,
+  sparkleInterval: 38,
+  sparkleRadius: 1.6,
+};
 
 const EnamelBrushBg = () => {
   const containerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth < 768 : false
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile((prev) => (prev !== mobile ? mobile : prev));
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const cfg = isMobile ? MOBILE_CONFIG : DESKTOP_CONFIG;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -47,14 +85,16 @@ const EnamelBrushBg = () => {
         const pt = path.getPointAtLength(dist);
         const pt2 = path.getPointAtLength(Math.min(len, dist + 4));
         const deg = (Math.atan2(pt2.y - pt.y, pt2.x - pt.x) * 180) / Math.PI - 14;
-        brush.setAttribute("transform", `translate(${pt.x}, ${pt.y}) rotate(${deg})`);
+        const scale = cfg.brushScale;
+        brush.setAttribute("transform", `translate(${pt.x}, ${pt.y}) rotate(${deg}) scale(${scale})`);
         brush.style.opacity = p < 0.08 ? `${p / 0.08}` : p > 0.88 ? `${(1 - p) / 0.12}` : "1";
 
-        if (dist - lastDist > 28) {
+        if (dist - lastDist > cfg.sparkleInterval) {
+          const scatter = isMobile ? 22 : 36;
           const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-          c.setAttribute("cx", `${pt.x + (Math.random() - 0.5) * 36}`);
-          c.setAttribute("cy", `${pt.y + (Math.random() - 0.5) * 36}`);
-          c.setAttribute("r", "2.2");
+          c.setAttribute("cx", `${pt.x + (Math.random() - 0.5) * scatter}`);
+          c.setAttribute("cy", `${pt.y + (Math.random() - 0.5) * scatter}`);
+          c.setAttribute("r", `${cfg.sparkleRadius}`);
           c.setAttribute("fill", "#F58A07");
           c.classList.add("dynamic-sparkle");
           c.style.setProperty("--dx1", "0px");
@@ -91,24 +131,24 @@ const EnamelBrushBg = () => {
       timeouts.forEach(clearTimeout);
       if (sparkles) sparkles.innerHTML = "";
     };
-  }, []);
+  }, [isMobile, cfg]);
 
   return (
     <div ref={containerRef} className="enamel-brush-bg" aria-hidden="true">
-      <svg id="polishScene" viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid slice">
+      <svg id="polishScene" viewBox={cfg.viewBox} preserveAspectRatio="xMidYMid slice">
         <defs>
           <linearGradient id="polishStrokeGrad" x1="0%" y1="85%" x2="100%" y2="15%">
-            <stop offset="0%" stopColor="#8A143E" stopOpacity="0.35" />
-            <stop offset="28%" stopColor="#D42261" stopOpacity="0.35" />
-            <stop offset="68%" stopColor="#E02869" stopOpacity="0.35" />
-            <stop offset="92%" stopColor="#F58A07" stopOpacity="0.35" />
-            <stop offset="100%" stopColor="#FFD166" stopOpacity="0.35" />
+            <stop offset="0%" stopColor="#8A143E" stopOpacity={cfg.opacity} />
+            <stop offset="28%" stopColor="#D42261" stopOpacity={cfg.opacity} />
+            <stop offset="68%" stopColor="#E02869" stopOpacity={cfg.opacity} />
+            <stop offset="92%" stopColor="#F58A07" stopOpacity={cfg.opacity} />
+            <stop offset="100%" stopColor="#FFD166" stopOpacity={cfg.opacity} />
           </linearGradient>
           <linearGradient id="polishGlossGrad" x1="5%" y1="85%" x2="95%" y2="20%">
-            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.30" />
-            <stop offset="30%" stopColor="#FFD6E6" stopOpacity="0.35" />
-            <stop offset="70%" stopColor="#FFFFFF" stopOpacity="0.35" />
-            <stop offset="100%" stopColor="#FFE08A" stopOpacity="0.30" />
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity={cfg.opacity * 0.85} />
+            <stop offset="30%" stopColor="#FFD6E6" stopOpacity={cfg.opacity} />
+            <stop offset="70%" stopColor="#FFFFFF" stopOpacity={cfg.opacity} />
+            <stop offset="100%" stopColor="#FFE08A" stopOpacity={cfg.opacity * 0.85} />
           </linearGradient>
           <linearGradient id="brushCapGrad" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#2E2A36" />
@@ -129,25 +169,21 @@ const EnamelBrushBg = () => {
         </defs>
 
         <g id="strokeGroup">
-          <path
-            id="masterPath"
-            d="M -70,705 C 205,680 435,545 675,380 C 895,228 1135,140 1295,268 C 1412,362 1368,582 1185,642"
-            fill="none"
-          />
+          <path id="masterPath" d={cfg.pathD} fill="none" />
           <path
             className="polish-track"
-            d="M -70,705 C 205,680 435,545 675,380 C 895,228 1135,140 1295,268 C 1412,362 1368,582 1185,642"
+            d={cfg.pathD}
             fill="none"
             stroke="url(#polishStrokeGrad)"
-            strokeWidth="72"
+            strokeWidth={cfg.strokeWidth}
             strokeLinecap="round"
           />
           <path
             className="polish-track"
-            d="M -70,687 C 205,662 435,527 675,362 C 895,210 1135,122 1295,250 C 1412,344 1368,564 1185,624"
+            d={cfg.glossPathD}
             fill="none"
             stroke="url(#polishGlossGrad)"
-            strokeWidth="8"
+            strokeWidth={cfg.glossStrokeWidth}
             strokeLinecap="round"
           />
         </g>
